@@ -1,12 +1,8 @@
 package ar.com.wolox.android.example.ui.example
 
-import androidx.core.widget.addTextChangedListener
 import ar.com.wolox.android.R
 import ar.com.wolox.android.databinding.FragmentExampleBinding
-import ar.com.wolox.android.example.ui.viewpager.ViewPagerActivity
 import ar.com.wolox.wolmo.core.fragment.WolmoFragment
-import ar.com.wolox.wolmo.core.util.openBrowser
-import ar.com.wolox.wolmo.core.util.openDial
 
 class ExampleFragment private constructor() : WolmoFragment<FragmentExampleBinding, ExamplePresenter>(), ExampleView {
 
@@ -17,24 +13,15 @@ class ExampleFragment private constructor() : WolmoFragment<FragmentExampleBindi
 
     override fun setListeners() {
         with(binding) {
-            usernameInput.addTextChangedListener { presenter.onUsernameInputChanged(it.toString()) }
-            woloxLink.setOnClickListener { presenter.onWoloxLinkClicked() }
-            woloxPhone.setOnClickListener { presenter.onWoloxPhoneClicked() }
-            loginButton.setOnClickListener {
-                presenter.onLoginButtonClicked(usernameInput.text.toString(), favouriteColorInput.text.toString())
+            btnLogin.setOnClickListener {
+                presenter.onLoginButtonClicked(etUsername.text.toString(), etPassword.text.toString())
             }
         }
     }
 
     override fun toggleLoginButtonEnable(isEnable: Boolean) {
-        binding.loginButton.isEnabled = isEnable
+        binding.btnLogin.isEnabled = isEnable
     }
-
-    override fun goToViewPager(favouriteColor: String) = ViewPagerActivity.start(requireContext(), favouriteColor)
-
-    override fun openBrowser(url: String) = requireContext().openBrowser(url)
-
-    override fun openPhone(woloxPhone: String) = requireContext().openDial(woloxPhone)
 
     companion object {
         fun newInstance() = ExampleFragment()
