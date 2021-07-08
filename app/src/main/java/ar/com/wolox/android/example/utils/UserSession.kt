@@ -12,11 +12,27 @@ class UserSession @Inject constructor(private val sharedPreferencesManager: Shar
     // application, but we should add a check in case Android decides to kill the application
     // and return to a state where this isn't initialized.
     var username: String? = null
-        get() = field ?: sharedPreferencesManager[Extras.UserLogin.USERNAME, null].also {
-            field = it
+    var password: String? = null
+    var loginOk: Boolean = false
+
+    // Para setear u obtener el username guardado en el sharedPreferences
+    fun get_Username() = username ?: sharedPreferencesManager[Extras.UserLogin.USERNAME, null].also {
+            username = it
         }
-        set(username) {
-            field = username
+    fun set_Username(username: String) {
+            this.username = username
             sharedPreferencesManager.store(Extras.UserLogin.USERNAME, username)
         }
+
+    // Para setear u obtener la password guardado en el sharedPreferences
+    fun get_Password() = password ?: sharedPreferencesManager[Extras.UserLogin.PASSWORD, null].also {
+        password = it
+    }
+    fun set_Password(password: String) {
+        this.password = password
+        sharedPreferencesManager.store(Extras.UserLogin.PASSWORD, password)
+    }
+
+    // Para saber si fueron guardados los datos
+    fun isLogin() = sharedPreferencesManager[Extras.UserLogin.USERNAME, null] != null
 }
