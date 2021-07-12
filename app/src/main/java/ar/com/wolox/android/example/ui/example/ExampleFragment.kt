@@ -1,5 +1,7 @@
 package ar.com.wolox.android.example.ui.example
 
+import android.content.Intent
+import android.net.Uri
 import ar.com.wolox.android.R
 import ar.com.wolox.android.databinding.FragmentExampleBinding
 import ar.com.wolox.android.example.utils.Extras
@@ -23,6 +25,12 @@ class ExampleFragment private constructor() : WolmoFragment<FragmentExampleBindi
             btnLogin.setOnClickListener {
                 presenter.onLoginButtonClicked(etUsername.text.toString(), etPassword.text.toString())
             }
+            btnSignup.setOnClickListener {
+                presenter.onSignUpButtonClicked()
+            }
+            tvTerms.setOnClickListener {
+                presenter.onTermsClicked()
+            }
         }
     }
 
@@ -39,5 +47,20 @@ class ExampleFragment private constructor() : WolmoFragment<FragmentExampleBindi
     override fun setDataSaved() {
         binding.etUsername.setText(presenter.getUserNameSaved())
         binding.etPassword.setText(presenter.getPasswordSaved())
+    }
+
+    override fun showHome() {
+        val intent = Intent(context, HomeActivity::class.java)
+        startActivity(intent)
+    }
+
+    override fun showSignUp() {
+        val intent = Intent(context, SignUpActivity::class.java)
+        startActivity(intent)
+    }
+
+    override fun showTerms() {
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(Extras.Constantes.URL_WOLOX))
+        startActivity(intent)
     }
 }

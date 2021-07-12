@@ -11,4 +11,16 @@ abstract class ExampleModule {
 
     @ContributesAndroidInjector
     internal abstract fun exampleFragment(): ExampleFragment
+
+    @ContributesAndroidInjector
+    internal abstract fun homeActivity(): HomeActivity
+
+    @ContributesAndroidInjector
+    internal abstract fun homeFragment(): HomeFragment
+
+    @ContributesAndroidInjector
+    internal abstract fun signUpActivity(): SignUpActivity
+
+    @ContributesAndroidInjector
+    internal abstract fun SignUpFragment(): SignUpFragment
 }

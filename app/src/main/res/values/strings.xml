@@ -14,12 +14,16 @@
     <string name="fragment_example_password">Password</string>
     <string name="fragment_example_login">Login</string>
     <string name="fragment_example_signup">Sign Up</string>
-	<string name="fragment_request_search">Search</string>
+    <string name="fragment_request_search">Search</string>
     <string name="fragment_request_post_id">Post id</string>
     <string name="fragment_request_invalid_input">Invalid input, please enter a valid id.</string>
 
     <string name="fragment_example_terms">By joining you agree to our <u>Terms &amp; Conditions</u></string>
     <string name="fragment_example_empty_value">This field is required</string>
     <string name="fragment_example_error_email">The email entered is invalid</string>
+
+    <string name="title_activity_home">Home</string>
+    <string name="title_activity_signup">Sign Up</string>
+
 
 </resources>

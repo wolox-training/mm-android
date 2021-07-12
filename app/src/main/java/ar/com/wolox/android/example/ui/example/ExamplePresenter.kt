@@ -24,6 +24,8 @@ class ExamplePresenter @Inject constructor(private val userSession: UserSession)
             userSession.loginOk = true
             userSession.set_Username(user)
             userSession.set_Password(pass)
+
+            view?.showHome()
         }
 
         // Forma que tenia para ir validando de acuerdo al campo
@@ -37,6 +39,16 @@ class ExamplePresenter @Inject constructor(private val userSession: UserSession)
 //                userSession.set_Password(pass)
 //            }
 //        }
+    }
+
+    // Para cuando se clickea sobre el boton signup
+    fun onSignUpButtonClicked() {
+        view?.showSignUp()
+    }
+
+    // Para cuando se clickea sobre el link terminos y condiciones
+    fun onTermsClicked() {
+        view?.showTerms()
     }
 
     // Para validar que sea un tipo email
