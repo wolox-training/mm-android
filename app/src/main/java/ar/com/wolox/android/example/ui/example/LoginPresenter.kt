@@ -6,7 +6,7 @@ import ar.com.wolox.android.example.utils.UserSession
 import ar.com.wolox.wolmo.core.presenter.BasePresenter
 import javax.inject.Inject
 
-class ExamplePresenter @Inject constructor(private val userSession: UserSession) : BasePresenter<ExampleView>() {
+class LoginPresenter @Inject constructor(private val userSession: UserSession) : BasePresenter<LoginView>() {
 
     fun onLoginButtonClicked(user: String, pass: String) {
         // Validar vacios y formato de email
@@ -21,9 +21,11 @@ class ExamplePresenter @Inject constructor(private val userSession: UserSession)
             view?.showError(Extras.UserLogin.PASSWORD)
 
         if (!user.isEmpty() && !pass.isEmpty()) {
-            userSession.loginOk = true
-            userSession.set_Username(user)
-            userSession.set_Password(pass)
+            userSession.apply {
+                loginOk = true
+                username = user
+                password = pass
+            }
         }
 
         // Forma que tenia para ir validando de acuerdo al campo
@@ -43,14 +45,14 @@ class ExamplePresenter @Inject constructor(private val userSession: UserSession)
     fun isValidEmail(email: String) = !email.isNullOrEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches()
 
     // Para obtener el username guardado
-    fun getUserNameSaved() = userSession.get_Username()
+    fun getUserNameSaved() = userSession.username
 
     // Para obtener la password guardada
-    fun getPasswordSaved() = userSession.get_Password()
+    fun getPasswordSaved() = userSession.password
 
     // Cargar datos iniciales si fueron guardados
     fun checkDataSaved() {
-        if (userSession.isLogin())
+        if (userSession.loginOk)
             view?.setDataSaved()
     }
 }
