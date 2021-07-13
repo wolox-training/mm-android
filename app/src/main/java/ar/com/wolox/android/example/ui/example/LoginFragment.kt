@@ -1,13 +1,17 @@
 package ar.com.wolox.android.example.ui.example
 
-import android.content.Intent
 import ar.com.wolox.android.R
 import ar.com.wolox.android.databinding.FragmentLoginBinding
 import ar.com.wolox.android.example.utils.Extras
 import ar.com.wolox.wolmo.core.fragment.WolmoFragment
+import ar.com.wolox.wolmo.core.util.ToastFactory
 import ar.com.wolox.wolmo.core.util.openBrowser
+import javax.inject.Inject
 
 class LoginFragment private constructor() : WolmoFragment<FragmentLoginBinding, LoginPresenter>(), LoginView {
+
+    @Inject
+    internal lateinit var toastFactory: ToastFactory
 
     override fun layout() = R.layout.fragment_login
 
@@ -19,12 +23,12 @@ class LoginFragment private constructor() : WolmoFragment<FragmentLoginBinding, 
     override fun setListeners() {
         with(binding) {
             btnLogin.setOnClickListener {
-                presenter.onLoginButtonClicked(etUsername.text.toString(), etPassword.text.toString())
+                presenter.onLoginButtonClicked(userName.text.toString(), password.text.toString())
             }
             btnSignup.setOnClickListener {
                 presenter.onSignUpButtonClicked()
             }
-            tvTerms.setOnClickListener {
+            terms.setOnClickListener {
                 presenter.onTermsClicked()
             }
         }
@@ -34,12 +38,13 @@ class LoginFragment private constructor() : WolmoFragment<FragmentLoginBinding, 
     override fun showError(tipo: String) {
         with(binding) {
             when (tipo) {
-                Extras.UserLogin.USERNAME -> etUsername.error =
+                Extras.UserLogin.USERNAME -> userName.error =
                     (getString(R.string.fragment_example_empty_value))
-                Extras.UserLogin.PASSWORD -> etPassword.error =
+                Extras.UserLogin.PASSWORD -> password.error =
                     (getString(R.string.fragment_example_empty_value))
-                Extras.UserLogin.VALID_EMAIL -> etUsername.error =
+                Extras.UserLogin.VALID_EMAIL -> userName.error =
                     (getString(R.string.fragment_example_error_email))
+                Extras.Constantes.ERROR_NETWORK -> toastFactory.show(R.string.unknown_error)
             }
         }
     }
@@ -47,19 +52,17 @@ class LoginFragment private constructor() : WolmoFragment<FragmentLoginBinding, 
     // Guardar los datos ingresados
     override fun setDataSaved() {
         with(binding) {
-            etUsername.setText(presenter.getUserNameSaved())
-            etPassword.setText(presenter.getPasswordSaved())
+            userName.setText(presenter.getUserNameSaved())
+            password.setText(presenter.getPasswordSaved())
         }
     }
 
     override fun showHome() {
-        val intent = Intent(context, HomeActivity::class.java)
-        startActivity(intent)
+        HomeActivity.start(requireContext())
     }
 
     override fun showSignUp() {
-        val intent = Intent(context, SignUpActivity::class.java)
-        startActivity(intent)
+        SignUpActivity.start(requireContext())
     }
 
     override fun showTerms() {

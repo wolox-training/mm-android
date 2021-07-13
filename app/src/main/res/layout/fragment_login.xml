@@ -15,14 +15,14 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:src="@mipmap/wolox_logo_large"
-			app:layout_constraintBottom_toTopOf="@id/etUsername"
+			app:layout_constraintBottom_toTopOf="@id/userName"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintStart_toStartOf="parent"
 			app:layout_constraintTop_toTopOf="parent"
 			app:layout_constraintVertical_bias="0" />
 
 		<EditText
-			android:id="@+id/etUsername"
+			android:id="@+id/userName"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:layout_marginLeft="@dimen/spacing_large"
@@ -31,14 +31,14 @@
 			android:hint="@string/fragment_example_username"
 			android:inputType="textEmailAddress"
 			android:maxLines="1"
-			app:layout_constraintBottom_toTopOf="@id/etPassword"
+			app:layout_constraintBottom_toTopOf="@id/password"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintStart_toStartOf="parent"
 			app:layout_constraintTop_toTopOf="parent"
 			app:layout_constraintVertical_chainStyle="packed" />
 
 		<EditText
-			android:id="@+id/etPassword"
+			android:id="@+id/password"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:layout_marginLeft="@dimen/spacing_large"
@@ -51,7 +51,7 @@
 			app:layout_constraintBottom_toTopOf="@id/btnLogin"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toBottomOf="@id/etUsername" />
+			app:layout_constraintTop_toBottomOf="@id/userName" />
 
 		<Button
 			android:id="@+id/btnLogin"
@@ -60,9 +60,9 @@
 			android:layout_marginTop="@dimen/spacing_large"
 			android:text="@string/fragment_example_login"
 			app:layout_constraintBottom_toTopOf="@+id/btnSignup"
-			app:layout_constraintEnd_toEndOf="@id/etUsername"
-			app:layout_constraintStart_toStartOf="@id/etUsername"
-			app:layout_constraintTop_toBottomOf="@id/etPassword" />
+			app:layout_constraintEnd_toEndOf="@id/userName"
+			app:layout_constraintStart_toStartOf="@id/userName"
+			app:layout_constraintTop_toBottomOf="@id/password" />
 
 		<Button
 			android:id="@+id/btnSignup"
@@ -70,13 +70,13 @@
 			android:layout_height="wrap_content"
 			android:layout_marginTop="@dimen/spacing_large"
 			android:text="@string/fragment_example_signup"
-			app:layout_constraintBottom_toTopOf="@+id/tvTerms"
-			app:layout_constraintEnd_toEndOf="@id/etUsername"
-			app:layout_constraintStart_toStartOf="@id/etUsername"
+			app:layout_constraintBottom_toTopOf="@+id/terms"
+			app:layout_constraintEnd_toEndOf="@id/userName"
+			app:layout_constraintStart_toStartOf="@id/userName"
 			app:layout_constraintTop_toBottomOf="@id/btnLogin" />
 
 		<TextView
-			android:id="@+id/tvTerms"
+			android:id="@+id/terms"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:gravity="center_horizontal"
@@ -85,8 +85,8 @@
 			android:layout_marginTop="@dimen/spacing_large"
 			android:layout_marginBottom="@dimen/spacing_large"
 			app:layout_constraintBottom_toBottomOf="parent"
-			app:layout_constraintEnd_toEndOf="@id/etUsername"
-			app:layout_constraintStart_toStartOf="@id/etUsername" />
+			app:layout_constraintEnd_toEndOf="@id/userName"
+			app:layout_constraintStart_toStartOf="@id/userName" />
 
 	</androidx.constraintlayout.widget.ConstraintLayout>
 

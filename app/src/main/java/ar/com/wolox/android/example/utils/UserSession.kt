@@ -15,11 +15,11 @@ class UserSession @Inject constructor(private val sharedPreferencesManager: Shar
         // Para setear u obtener el username guardado en el sharedPreferences
         get() = field ?: sharedPreferencesManager[Extras.UserLogin.USERNAME, null].also {
             field = it
-            }
+        }
         set(username) {
-                field = username
-                sharedPreferencesManager.store(Extras.UserLogin.USERNAME, field)
-            }
+            field = username
+            sharedPreferencesManager.store(Extras.UserLogin.USERNAME, field)
+        }
 
     var password: String? = null
         // Para setear u obtener la password guardado en el sharedPreferences
