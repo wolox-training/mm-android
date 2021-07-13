@@ -4,13 +4,13 @@ import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
 @Module
-abstract class ExampleModule {
+abstract class Module {
 
     @ContributesAndroidInjector
-    internal abstract fun exampleActivity(): ExampleActivity
+    internal abstract fun exampleActivity(): LoginActivity
 
     @ContributesAndroidInjector
-    internal abstract fun exampleFragment(): ExampleFragment
+    internal abstract fun exampleFragment(): LoginFragment
 
     @ContributesAndroidInjector
     internal abstract fun homeActivity(): HomeActivity

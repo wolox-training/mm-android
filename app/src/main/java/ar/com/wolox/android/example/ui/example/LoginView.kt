@@ -1,6 +1,6 @@
 package ar.com.wolox.android.example.ui.example
 
-interface ExampleView {
+interface LoginView {
 
     fun showError(tipo: String)
 
