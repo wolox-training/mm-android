@@ -14,7 +14,7 @@ class ExampleFragment private constructor() : WolmoFragment<FragmentExampleBindi
     override fun setListeners() {
         with(binding) {
             btnLogin.setOnClickListener {
-                presenter.onLoginButtonClicked(etUsername.text.toString(), etPassword.text.toString())
+                presenter.onLoginButtonClicked(userName.text.toString(), password.text.toString())
             }
         }
     }
