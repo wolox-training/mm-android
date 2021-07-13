@@ -4,6 +4,7 @@ import ar.com.wolox.android.R
 import ar.com.wolox.android.databinding.FragmentExampleBinding
 import ar.com.wolox.android.example.utils.Extras
 import ar.com.wolox.wolmo.core.fragment.WolmoFragment
+import ar.com.wolox.wolmo.core.util.openBrowser
 
 class LoginFragment private constructor() : WolmoFragment<FragmentExampleBinding, LoginPresenter>(), LoginView {
 
@@ -18,6 +19,12 @@ class LoginFragment private constructor() : WolmoFragment<FragmentExampleBinding
         with(binding) {
             btnLogin.setOnClickListener {
                 presenter.onLoginButtonClicked(userName.text.toString(), password.text.toString())
+            }
+            btnSignup.setOnClickListener {
+                presenter.onSignUpButtonClicked()
+            }
+            terms.setOnClickListener {
+                presenter.onTermsClicked()
             }
         }
     }
@@ -42,6 +49,18 @@ class LoginFragment private constructor() : WolmoFragment<FragmentExampleBinding
             userName.setText(presenter.getUserNameSaved())
             password.setText(presenter.getPasswordSaved())
         }
+    }
+
+    override fun showHome() {
+        HomeActivity.start(requireContext())
+    }
+
+    override fun showSignUp() {
+        SignUpActivity.start(requireContext())
+    }
+
+    override fun showTerms() {
+        context?.openBrowser(Extras.Constantes.URL_WOLOX)
     }
 
     companion object {

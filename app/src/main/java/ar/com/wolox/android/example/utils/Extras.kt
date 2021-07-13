@@ -10,6 +10,10 @@ import androidx.fragment.app.Fragment
  */
 object Extras {
 
+    object Constantes {
+        const val URL_WOLOX = "https://www.wolox.com.ar"
+    }
+
     object UserLogin {
         const val USERNAME = "username"
         const val PASSWORD = "password"
