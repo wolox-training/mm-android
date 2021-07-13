@@ -32,10 +32,10 @@ class LoginPresenter @Inject constructor(private val userSession: UserSession, p
         }
     }
 
-    //Para verificar el user and pass al endpoint
+    // Para verificar el user and pass al endpoint
     fun loginNetwork(user: String, pass: String) = launch {
 
-        //Armado del request
+        // Armado del request
         val jsonObject = JSONObject()
         jsonObject.put("email", user)
         jsonObject.put("password", pass)
@@ -43,10 +43,10 @@ class LoginPresenter @Inject constructor(private val userSession: UserSession, p
 
         val requestBody = jsonObjectString.toRequestBody("application/json".toMediaTypeOrNull())
 
-        //Llamado al endpoint
+        // Llamado al endpoint
         networkRequest(userRepository.signIn(requestBody)) {
             onResponseSuccessful {
-                //Si el login fue satisfactorio, guardamos los datos y continuamos con el Home
+                // Si el login fue satisfactorio, guardamos los datos y continuamos con el Home
                 userSession.apply {
                     loginOk = true
                     username = user
@@ -54,7 +54,7 @@ class LoginPresenter @Inject constructor(private val userSession: UserSession, p
                 }
                 view?.showHome()
             }
-            onResponseFailed { _, _ ->view?.showError(Extras.Constantes.ERROR_NETWORK) }
+            onResponseFailed { _, _ -> view?.showError(Extras.Constantes.ERROR_NETWORK) }
             onCallFailure { view?.showError(Extras.Constantes.ERROR_NETWORK)
             }
         }
