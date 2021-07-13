@@ -1,19 +1,15 @@
 package ar.com.wolox.android.example.ui.example
 
 import android.content.Intent
-import android.net.Uri
 import ar.com.wolox.android.R
-import ar.com.wolox.android.databinding.FragmentExampleBinding
+import ar.com.wolox.android.databinding.FragmentLoginBinding
 import ar.com.wolox.android.example.utils.Extras
 import ar.com.wolox.wolmo.core.fragment.WolmoFragment
+import ar.com.wolox.wolmo.core.util.openBrowser
 
-class ExampleFragment private constructor() : WolmoFragment<FragmentExampleBinding, ExamplePresenter>(), ExampleView {
+class LoginFragment private constructor() : WolmoFragment<FragmentLoginBinding, LoginPresenter>(), LoginView {
 
-    companion object {
-        fun newInstance() = ExampleFragment()
-    }
-
-    override fun layout() = R.layout.fragment_example
+    override fun layout() = R.layout.fragment_login
 
     override fun init() {
         // Validar si hay datos guardados
@@ -36,17 +32,24 @@ class ExampleFragment private constructor() : WolmoFragment<FragmentExampleBindi
 
     // Mostrar los errores en cada campo
     override fun showError(tipo: String) {
-        when (tipo) {
-            Extras.UserLogin.USERNAME -> binding.etUsername.error = (getString(R.string.fragment_example_empty_value))
-            Extras.UserLogin.PASSWORD -> binding.etPassword.error = (getString(R.string.fragment_example_empty_value))
-            Extras.UserLogin.VALID_EMAIL -> binding.etUsername.error = (getString(R.string.fragment_example_error_email))
+        with(binding) {
+            when (tipo) {
+                Extras.UserLogin.USERNAME -> etUsername.error =
+                    (getString(R.string.fragment_example_empty_value))
+                Extras.UserLogin.PASSWORD -> etPassword.error =
+                    (getString(R.string.fragment_example_empty_value))
+                Extras.UserLogin.VALID_EMAIL -> etUsername.error =
+                    (getString(R.string.fragment_example_error_email))
+            }
         }
     }
 
     // Guardar los datos ingresados
     override fun setDataSaved() {
-        binding.etUsername.setText(presenter.getUserNameSaved())
-        binding.etPassword.setText(presenter.getPasswordSaved())
+        with(binding) {
+            etUsername.setText(presenter.getUserNameSaved())
+            etPassword.setText(presenter.getPasswordSaved())
+        }
     }
 
     override fun showHome() {
@@ -60,7 +63,10 @@ class ExampleFragment private constructor() : WolmoFragment<FragmentExampleBindi
     }
 
     override fun showTerms() {
-        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(Extras.Constantes.URL_WOLOX))
-        startActivity(intent)
+        context?.openBrowser(Extras.Constantes.URL_WOLOX)
+    }
+
+    companion object {
+        fun newInstance() = LoginFragment()
     }
 }

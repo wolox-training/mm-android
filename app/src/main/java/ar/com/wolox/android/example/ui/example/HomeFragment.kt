@@ -6,12 +6,12 @@ import ar.com.wolox.wolmo.core.fragment.WolmoFragment
 
 class HomeFragment private constructor() : WolmoFragment<FragmentHomeBinding, HomePresenter>(), HomeView {
 
-    companion object {
-        fun newInstance() = HomeFragment()
-    }
-
     override fun layout() = R.layout.fragment_home
 
     override fun init() {
+    }
+
+    companion object {
+        fun newInstance() = HomeFragment()
     }
 }
