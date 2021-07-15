@@ -9,7 +9,7 @@ class MainFragment private constructor() : WolmoFragment<FragmentMainBinding, Ma
     override fun layout() = R.layout.fragment_main
 
     override fun init() {
-        //Si el usuario no está logueado redirigir al Login
+        // Si el usuario no está logueado redirigir al Login
         if (!presenter.checkUserLogin())
             LoginActivity.start(requireContext())
     }

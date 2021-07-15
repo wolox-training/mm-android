@@ -1,6 +1,7 @@
 package ar.com.wolox.android.example.ui.example
 
 import android.util.Patterns
+import android.view.View
 import ar.com.wolox.android.example.model.AuthenticationBody
 import ar.com.wolox.android.example.network.builder.networkRequest
 import ar.com.wolox.android.example.network.repository.UserRepository
@@ -26,6 +27,9 @@ class LoginPresenter @Inject constructor(private val userSession: UserSession, p
             view?.showError(Extras.UserLogin.PASSWORD)
 
         if (!user.isEmpty() && !pass.isEmpty()) {
+            //Mostrar progressbar
+            view?.showLoading(View.VISIBLE)
+
             loginNetwork(user, pass)
         }
     }
@@ -46,11 +50,25 @@ class LoginPresenter @Inject constructor(private val userSession: UserSession, p
                     uid = headers?.get("Uid")
                     client = headers?.get("Client")
                 }
+                //Ocultar progressbar
+                view?.showLoading(View.GONE)
 
                 view?.showHome()
             }
-            onResponseFailed { _, _ -> view?.showError(Extras.Constantes.ERROR_NETWORK) }
-            onCallFailure { view?.showError(Extras.Constantes.ERROR_NETWORK)
+            onResponseFailed { _, code ->
+                if (code == 401)
+                    view?.showError(Extras.Constantes.ERROR_USER_PASS)
+                else
+                    view?.showError(Extras.Constantes.ERROR_GENERIC)
+
+                //Ocultar progressbar
+                view?.showLoading(View.GONE)
+            }
+            onCallFailure {
+                view?.showError(Extras.Constantes.ERROR_NETWORK)
+
+                //Ocultar progressbar
+                view?.showLoading(View.GONE)
             }
         }
     }

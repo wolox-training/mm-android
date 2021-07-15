@@ -44,7 +44,9 @@ class LoginFragment private constructor() : WolmoFragment<FragmentLoginBinding, 
                     (getString(R.string.fragment_example_empty_value))
                 Extras.UserLogin.VALID_EMAIL -> userName.error =
                     (getString(R.string.fragment_example_error_email))
-                Extras.Constantes.ERROR_NETWORK -> toastFactory.show(R.string.unknown_error)
+                Extras.Constantes.ERROR_USER_PASS -> toastFactory.show(R.string.fragment_example_error_email_pass)
+                Extras.Constantes.ERROR_NETWORK -> toastFactory.show(R.string.fragment_example_error_network)
+                Extras.Constantes.ERROR_GENERIC -> toastFactory.show(R.string.unknown_error)
             }
         }
     }
@@ -67,6 +69,12 @@ class LoginFragment private constructor() : WolmoFragment<FragmentLoginBinding, 
 
     override fun showTerms() {
         context?.openBrowser(Extras.Constantes.URL_WOLOX)
+    }
+
+    override fun showLoading(visibility: Int) {
+        with(binding) {
+            progress.visibility = visibility
+        }
     }
 
     companion object {
