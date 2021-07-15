@@ -11,4 +11,6 @@ interface LoginView {
     fun showSignUp()
 
     fun showTerms()
+
+    fun showLoading(visibility: Int)
 }

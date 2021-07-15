@@ -12,7 +12,9 @@ object Extras {
 
     object Constantes {
         const val URL_WOLOX = "https://www.wolox.com.ar"
+        const val ERROR_USER_PASS = "error email pass"
         const val ERROR_NETWORK = "error network"
+        const val ERROR_GENERIC = "error generic"
     }
 
     object UserLogin {

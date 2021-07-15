@@ -21,6 +21,8 @@
     <string name="fragment_example_terms">By joining you agree to our <u>Terms &amp; Conditions</u></string>
     <string name="fragment_example_empty_value">This field is required</string>
     <string name="fragment_example_error_email">The email entered is invalid</string>
+    <string name="fragment_example_error_email_pass">The email or password entered is invalid</string>
+    <string name="fragment_example_error_network">Check the connection to the network.</string>
 
     <string name="title_activity_home">Home</string>
     <string name="title_activity_signup">Sign Up</string>
