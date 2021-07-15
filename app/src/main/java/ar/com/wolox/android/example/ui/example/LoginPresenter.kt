@@ -1,15 +1,13 @@
 package ar.com.wolox.android.example.ui.example
 
 import android.util.Patterns
+import ar.com.wolox.android.example.model.AuthenticationBody
 import ar.com.wolox.android.example.network.builder.networkRequest
 import ar.com.wolox.android.example.network.repository.UserRepository
 import ar.com.wolox.android.example.utils.Extras
 import ar.com.wolox.android.example.utils.UserSession
 import ar.com.wolox.wolmo.core.presenter.CoroutineBasePresenter
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.RequestBody.Companion.toRequestBody
 import kotlinx.coroutines.launch
-import org.json.JSONObject
 import javax.inject.Inject
 
 class LoginPresenter @Inject constructor(private val userSession: UserSession, private val userRepository: UserRepository) :
@@ -34,24 +32,21 @@ class LoginPresenter @Inject constructor(private val userSession: UserSession, p
 
     // Para verificar el user and pass al endpoint
     fun loginNetwork(user: String, pass: String) = launch {
-
-        // Armado del request
-        val jsonObject = JSONObject()
-        jsonObject.put("email", user)
-        jsonObject.put("password", pass)
-        val jsonObjectString = jsonObject.toString()
-
-        val requestBody = jsonObjectString.toRequestBody("application/json".toMediaTypeOrNull())
+        val authbody = AuthenticationBody(user, pass)
 
         // Llamado al endpoint
-        networkRequest(userRepository.signIn(requestBody)) {
-            onResponseSuccessful {
+        networkRequest(userRepository.signIn(authbody)) {
+            onResponseSuccessful { _, headers ->
                 // Si el login fue satisfactorio, guardamos los datos y continuamos con el Home
                 userSession.apply {
                     loginOk = true
                     username = user
                     password = pass
+                    acces_token = headers?.get("Access-Token")
+                    uid = headers?.get("Uid")
+                    client = headers?.get("Client")
                 }
+
                 view?.showHome()
             }
             onResponseFailed { _, _ -> view?.showError(Extras.Constantes.ERROR_NETWORK) }
