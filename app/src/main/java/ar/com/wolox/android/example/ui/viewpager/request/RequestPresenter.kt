@@ -18,7 +18,7 @@ class RequestPresenter @Inject constructor(
         }
 
         networkRequest(postRepository.getPostById(postId)) {
-            onResponseSuccessful { response -> showPost(response!!) }
+            onResponseSuccessful { response, _ -> showPost(response!!) }
             onResponseFailed { _, _ -> view?.showError() }
             onCallFailure { view?.showError() }
         }

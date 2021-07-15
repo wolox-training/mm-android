@@ -1,14 +1,19 @@
 package ar.com.wolox.android.example.ui.example
 
 import ar.com.wolox.android.R
-import ar.com.wolox.android.databinding.FragmentExampleBinding
+import ar.com.wolox.android.databinding.FragmentLoginBinding
 import ar.com.wolox.android.example.utils.Extras
 import ar.com.wolox.wolmo.core.fragment.WolmoFragment
+import ar.com.wolox.wolmo.core.util.ToastFactory
 import ar.com.wolox.wolmo.core.util.openBrowser
+import javax.inject.Inject
 
-class LoginFragment private constructor() : WolmoFragment<FragmentExampleBinding, LoginPresenter>(), LoginView {
+class LoginFragment private constructor() : WolmoFragment<FragmentLoginBinding, LoginPresenter>(), LoginView {
 
-    override fun layout() = R.layout.fragment_example
+    @Inject
+    internal lateinit var toastFactory: ToastFactory
+
+    override fun layout() = R.layout.fragment_login
 
     override fun init() {
         // Validar si hay datos guardados
@@ -39,6 +44,7 @@ class LoginFragment private constructor() : WolmoFragment<FragmentExampleBinding
                     (getString(R.string.fragment_example_empty_value))
                 Extras.UserLogin.VALID_EMAIL -> userName.error =
                     (getString(R.string.fragment_example_error_email))
+                Extras.Constantes.ERROR_NETWORK -> toastFactory.show(R.string.unknown_error)
             }
         }
     }
