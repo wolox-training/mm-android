@@ -1,7 +1,7 @@
 package ar.com.wolox.android.example.ui.example
 
-import android.util.Patterns
 import android.view.View
+import androidx.core.util.PatternsCompat
 import ar.com.wolox.android.example.model.AuthenticationBody
 import ar.com.wolox.android.example.network.builder.networkRequest
 import ar.com.wolox.android.example.network.repository.UserRepository
@@ -27,7 +27,7 @@ class LoginPresenter @Inject constructor(private val userSession: UserSession, p
             view?.showError(Extras.UserLogin.PASSWORD)
 
         if (!user.isEmpty() && !pass.isEmpty()) {
-            //Mostrar progressbar
+            // Mostrar progressbar
             view?.showLoading(View.VISIBLE)
 
             loginNetwork(user, pass)
@@ -50,7 +50,7 @@ class LoginPresenter @Inject constructor(private val userSession: UserSession, p
                     uid = headers?.get("Uid")
                     client = headers?.get("Client")
                 }
-                //Ocultar progressbar
+                // Ocultar progressbar
                 view?.showLoading(View.GONE)
 
                 view?.showHome()
@@ -61,13 +61,13 @@ class LoginPresenter @Inject constructor(private val userSession: UserSession, p
                 else
                     view?.showError(Extras.Constantes.ERROR_GENERIC)
 
-                //Ocultar progressbar
+                // Ocultar progressbar
                 view?.showLoading(View.GONE)
             }
             onCallFailure {
                 view?.showError(Extras.Constantes.ERROR_NETWORK)
 
-                //Ocultar progressbar
+                // Ocultar progressbar
                 view?.showLoading(View.GONE)
             }
         }
@@ -84,7 +84,7 @@ class LoginPresenter @Inject constructor(private val userSession: UserSession, p
     }
 
     // Para validar que sea un tipo email
-    fun isValidEmail(email: String) = !email.isNullOrEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches()
+    fun isValidEmail(email: String) = !email.isNullOrEmpty() && PatternsCompat.EMAIL_ADDRESS.matcher(email).matches()
 
     // Para obtener el username guardado
     fun getUserNameSaved() = userSession.username
