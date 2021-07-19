@@ -6,8 +6,10 @@ import ar.com.wolox.android.R
 import ar.com.wolox.android.databinding.ActivityBaseBinding
 import ar.com.wolox.wolmo.core.activity.WolmoActivity
 import ar.com.wolox.wolmo.core.util.jumpTo
+import ar.com.wolox.wolmo.core.util.jumpToClearingTask
+import javax.inject.Inject
 
-class HomeActivity : WolmoActivity<ActivityBaseBinding>() {
+class HomeActivity @Inject constructor() : WolmoActivity<ActivityBaseBinding>() {
 
     override fun layout() = R.layout.activity_base
 
@@ -21,7 +23,7 @@ class HomeActivity : WolmoActivity<ActivityBaseBinding>() {
 
     companion object {
 
-        fun start(context: Context) = context.jumpTo(
+        fun start(context: Context) = context.jumpToClearingTask(
             HomeActivity::class.java)
     }
 }
