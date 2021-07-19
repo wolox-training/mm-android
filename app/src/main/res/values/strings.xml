@@ -24,8 +24,10 @@
     <string name="fragment_example_error_email_pass">The email or password entered is invalid</string>
     <string name="fragment_example_error_network">Check the connection to the network.</string>
 
-    <string name="title_activity_home">Home</string>
+    <string name="title_activity_home">Wolox</string>
     <string name="title_activity_signup">Sign Up</string>
 
+    <string name="title_tab_home_news">NEWS</string>
+    <string name="title_tab_home_profile">PROFILE</string>
 
 </resources>

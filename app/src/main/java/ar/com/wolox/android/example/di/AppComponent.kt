@@ -2,10 +2,7 @@ package ar.com.wolox.android.example.di
 
 import android.app.Application
 import ar.com.wolox.android.example.BootstrapApplication
-import ar.com.wolox.android.example.ui.example.HomeModule
-import ar.com.wolox.android.example.ui.example.LoginModule
-import ar.com.wolox.android.example.ui.example.MainModule
-import ar.com.wolox.android.example.ui.example.SignUpModule
+import ar.com.wolox.android.example.ui.example.*
 import ar.com.wolox.android.example.ui.viewpager.ViewPagerActivityModule
 import ar.com.wolox.wolmo.core.di.modules.ContextModule
 import ar.com.wolox.wolmo.core.di.modules.DefaultModule

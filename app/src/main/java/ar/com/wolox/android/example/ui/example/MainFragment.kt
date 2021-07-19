@@ -12,6 +12,8 @@ class MainFragment private constructor() : WolmoFragment<FragmentMainBinding, Ma
         // Si el usuario no está logueado redirigir al Login
         if (!presenter.checkUserLogin())
             LoginActivity.start(requireContext())
+        else
+            HomeActivity.start(requireContext())
     }
 
     companion object {
