@@ -13,7 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".example.ui.example.MainActivity"
+            android:name=".example.ui.example.activity.MainActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
@@ -23,17 +23,17 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".example.ui.example.LoginActivity"
+            android:name=".example.ui.example.activity.LoginActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".example.ui.viewpager.ViewPagerActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".example.ui.example.HomeActivity"
+            android:name=".example.ui.example.activity.HomeActivity"
             android:label="@string/title_activity_home"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
-            android:name=".example.ui.example.SignUpActivity"
+            android:name=".example.ui.example.activity.SignUpActivity"
             android:label="@string/title_activity_signup"
             android:theme="@style/AppTheme.NoActionBar"/>
     </application>

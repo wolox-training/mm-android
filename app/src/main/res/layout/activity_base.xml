@@ -7,7 +7,7 @@
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".example.ui.example.HomeActivity">
+        tools:context=".example.ui.example.activity.HomeActivity">
 
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
@@ -20,6 +20,7 @@
                 android:layout_height="?attr/actionBarSize"
                 android:background="?attr/colorPrimary"
                 app:popupTheme="@style/AppTheme.PopupOverlay"
+                app:titleMarginStart="30dp"
                 app:logo="@mipmap/wolox_logo"/>
 
         </com.google.android.material.appbar.AppBarLayout>

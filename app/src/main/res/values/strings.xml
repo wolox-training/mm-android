@@ -1,33 +1,23 @@
 <resources>
 
     <!-- General -->
-    <string name="example_title">ExampleFragment</string>
-    <string name="example_random_description">Press the button to generate a random number</string>
-    <string name="example_randomize">Randomize</string>
-    <string name="example_wolox">WOLOX</string>
-    <string name="example_wolox_phone">0800 123 4567</string>
-    <string name="example_message">The presenter generated the number %1$d and this view is displaying it</string>
-    <string name="view_pager_title">Username: %1$s\nFavourite color: %2$s</string>
-    <string name="random_toolbar_title">Random number example</string>
-    <string name="request_toolbar_title">Example Request</string>
-    <string name="fragment_example_username">Username</string>
-    <string name="fragment_example_password">Password</string>
-    <string name="fragment_example_login">Login</string>
-    <string name="fragment_example_signup">Sign Up</string>
-    <string name="fragment_request_search">Search</string>
-    <string name="fragment_request_post_id">Post id</string>
-    <string name="fragment_request_invalid_input">Invalid input, please enter a valid id.</string>
+    <string name="fragment_login_username">Username</string>
+    <string name="fragment_login_password">Password</string>
+    <string name="fragment_login">Login</string>
+    <string name="fragment_login_signup">Sign Up</string>
 
-    <string name="fragment_example_terms">By joining you agree to our <u>Terms &amp; Conditions</u></string>
-    <string name="fragment_example_empty_value">This field is required</string>
-    <string name="fragment_example_error_email">The email entered is invalid</string>
-    <string name="fragment_example_error_email_pass">The email or password entered is invalid</string>
-    <string name="fragment_example_error_network">Check the connection to the network.</string>
+    <string name="fragment_login_terms">By joining you agree to our <u>Terms &amp; Conditions</u></string>
+    <string name="fragment_login_empty_value">This field is required</string>
+    <string name="fragment_login_error_email">The email entered is invalid</string>
+    <string name="fragment_login_error_email_pass">The email or password entered is invalid</string>
+    <string name="fragment_login_error_network">Check the connection to the network.</string>
 
     <string name="title_activity_home">Wolox</string>
     <string name="title_activity_signup">Sign Up</string>
 
     <string name="title_tab_home_news">NEWS</string>
     <string name="title_tab_home_profile">PROFILE</string>
+
+    <string name="news_no_more_news">There is no more news to show.</string>
 
 </resources>
