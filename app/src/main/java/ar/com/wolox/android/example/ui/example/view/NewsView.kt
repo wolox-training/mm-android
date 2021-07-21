@@ -11,4 +11,6 @@ interface NewsView{
     fun showError(tipo: String)
 
     fun adapterRefresh()
+
+    fun clearRefreshing()
 }

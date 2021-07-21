@@ -3,6 +3,7 @@ package ar.com.wolox.android.example.ui.example.presenter
 import android.view.View
 import ar.com.wolox.android.databinding.ItemNewBinding
 import ar.com.wolox.android.example.model.News
+import ar.com.wolox.android.example.model.RequestNews
 import ar.com.wolox.android.example.network.builder.networkRequest
 import ar.com.wolox.android.example.network.repository.NewsRepository
 import ar.com.wolox.android.example.network.repository.UserRepository
@@ -20,42 +21,57 @@ class NewsPresenter @Inject constructor(private val userSession: UserSession, pr
     CoroutineBasePresenter<NewsView>(){
 
     private var items : MutableList<News> = mutableListOf()
-    private lateinit var bindingHolder: ItemNewBinding
-
-    //Agregar el binding
-    fun addBinding(binding : ItemNewBinding){
-        bindingHolder=binding
-    }
+    private var page = 1
 
     //Para cargar todos los items
-    fun addAllItemsNews(items : MutableList<News>?){
+    fun addAllItemsNews(items : List<News>?){
         if(items!=null)
             this.items.addAll(items)
     }
 
     fun onBindNewsViewAtPosition(holder: NewsViewHolder, position: Int){
-        holder.binding=bindingHolder
-
-        //Cargar los datos de las noticias
-        holder.setDataNews(items[position])
+        holder.apply {
+            //Cargar los datos de las noticias
+            setDataNews(items[position])
+        }
     }
 
     fun getNewsRowsCount() : Int = items.size
 
-    fun getNews() = launch{
-        // Mostrar progressbar
-        view?.showLoading(View.VISIBLE)
+    fun getNews(fromPullRefresh : Boolean) = launch{
+        // Si es por pull refresh consulto page=1 y no muestro progressbar
+        var currentpage=page
+        if(fromPullRefresh)
+            currentpage=1
+        else
+            view?.showLoading(View.VISIBLE)
 
         // Llamado al endpoint
-        networkRequest(newsRepository.getNews(userSession.acces_token,userSession.client,userSession.uid)) {
+        networkRequest(newsRepository.getNews(userSession.acces_token,userSession.client,userSession.uid, currentpage)) {
             onResponseSuccessful { requestNews, _ ->
 
                 //Verificar que hay noticias
-                if (requestNews?.page?.size == 0)
-                    view?.showError(Extras.Constantes.NO_MORE_NEWS)
+                if(requestNews==null)
+                    view?.showError(Extras.Constantes.ERROR_GENERIC)
                 else {
-                    addAllItemsNews(requestNews?.page)
-                    view?.adapterRefresh()
+                    if (requestNews.page.isEmpty())
+                        view?.showError(Extras.Constantes.NO_MORE_NEWS)
+                    else {
+                        //Verificar si se hizo un pull refresh
+                        if(fromPullRefresh){
+                            compareItems(requestNews.page)
+
+                            view?.clearRefreshing()
+                        }
+                        else {
+                            addAllItemsNews(requestNews.page)
+
+                            //Guardo siguiente pagina para buscar
+                            page = requestNews.next_page
+                        }
+
+                        view?.adapterRefresh()
+                    }
                 }
 
                 // Ocultar progressbar
@@ -67,13 +83,27 @@ class NewsPresenter @Inject constructor(private val userSession: UserSession, pr
 
                 // Ocultar progressbar
                 view?.showLoading(View.GONE)
+                view?.clearRefreshing()
             }
             onCallFailure {
                 view?.showError(Extras.Constantes.ERROR_NETWORK)
 
                 // Ocultar progressbar
                 view?.showLoading(View.GONE)
+                view?.clearRefreshing()
             }
         }
+    }
+
+    //Comparar si hay items nuevos para agregar adelante de la lista
+    fun compareItems(newitems : List<News>){
+        val firtselement=Extras.convertToDate(items[0].date)
+        val newitemsaux =newitems.filter { Extras.convertToDate(it.date)!!.isAfter(firtselement) }
+
+        //Si no hay noticias nuevas, muestro mensaje
+        if(newitemsaux.isEmpty())
+            view?.showError(Extras.Constantes.NO_MORE_NEWS)
+        else
+            newitemsaux.forEach { items.add(0,it) }
     }
 }

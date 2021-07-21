@@ -20,4 +20,8 @@
 
     <string name="news_no_more_news">There is no more news to show.</string>
 
+    <string name="item_new_title">Ali Connors</string>
+    <string name="item_new_description">I´ll be in your neighborhood doing errands..</string>
+    <string name="item_new_date">15m</string>
+
 </resources>

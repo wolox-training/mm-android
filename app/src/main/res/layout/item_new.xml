@@ -3,13 +3,13 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="88dp"
-        android:layout_margin="16dp">
+        android:layout_height="@dimen/static_spacing_largest_extra"
+        android:layout_margin="@dimen/static_spacing_medium_extra">
 
         <ImageView
             android:id="@+id/image"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="@dimen/static_spacing_huge"
+            android:layout_height="@dimen/static_spacing_huge"
             android:src="@mipmap/wolox_logo"/>
 
         <LinearLayout
@@ -18,21 +18,21 @@
             android:orientation="vertical"
             android:layout_toEndOf="@+id/image"
             android:layout_toStartOf="@+id/li_date"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="5dp">
+            android:layout_marginStart="@dimen/static_spacing_small"
+            android:layout_marginEnd="@dimen/static_spacing_small">
 
             <TextView
                 android:id="@+id/title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Ali Connors"
+                android:text="@string/item_new_title"
                 android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="I´ll be in your neighborhood doing errands.."/>
+                android:text="@string/item_new_description"/>
 
         </LinearLayout>
 
@@ -48,7 +48,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="15m"/>
+                android:text="@string/item_new_date"/>
 
             <ImageView
                 android:id="@+id/like"
@@ -56,7 +56,7 @@
                 android:layout_height="wrap_content"
                 android:src="@mipmap/ic_like_off"
                 android:layout_gravity="center"
-                android:layout_marginTop="10dp"/>
+                android:layout_marginTop="@dimen/static_spacing_medium"/>
 
         </LinearLayout>
 

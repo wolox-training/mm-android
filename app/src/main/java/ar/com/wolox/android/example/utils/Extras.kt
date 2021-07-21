@@ -3,6 +3,8 @@ package ar.com.wolox.android.example.utils
 import android.app.Activity
 import android.content.SharedPreferences
 import androidx.fragment.app.Fragment
+import org.joda.time.DateTime
+import org.joda.time.format.DateTimeFormat
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -34,6 +36,8 @@ object Extras {
         const val login_test_header_accessToken = "I54n43S_l62NDKWXbuZaSA"
         const val login_test_header_client = "P-DyyGXKtHWrc1Lg5wnY2g"
         const val login_test_header_uid = "melvin.lambert15@example.com"
+
+        const val OFFSETVISIBLE=2
     }
 
     object UserLogin {
@@ -46,18 +50,10 @@ object Extras {
     }
 
     //Convierte una fecha pasada como string a Date, en el formato yyyy-MM-dd
-    fun convertToDate(strdate : String) : Date? {
-        val dateFormat = SimpleDateFormat("yyyy-MM-dd")
+    fun convertToDate(strdate : String) : DateTime? {
+        val dateFormat = DateTimeFormat.forPattern("yyyy-MM-dd")
 
-        var convertedDate : Date?= null
+        return DateTime.parse(strdate,dateFormat)
 
-        try {
-            convertedDate = dateFormat.parse(strdate)
-        } catch (e : ParseException) {
-            // TODO Auto-generated catch block
-            e.printStackTrace()
-        }
-
-        return convertedDate
     }
 }

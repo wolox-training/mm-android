@@ -1,6 +1,5 @@
 package ar.com.wolox.android.example.ui.example.viewholder
 
-import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import ar.com.wolox.android.databinding.ItemNewBinding
 import ar.com.wolox.android.example.model.News
@@ -8,16 +7,10 @@ import ar.com.wolox.android.example.ui.example.view.NewsView
 import ar.com.wolox.android.example.utils.Extras
 import com.bumptech.glide.Glide
 import org.ocpsoft.prettytime.PrettyTime
-import java.util.*
 
-class NewsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),NewsView {
+class NewsViewHolder constructor(private var binding: ItemNewBinding) : RecyclerView.ViewHolder(binding.root),NewsView {
 
-    lateinit var binding: ItemNewBinding
     private val prettyTime : PrettyTime = PrettyTime()
-
-    fun set(binding:ItemNewBinding){
-        this.binding=binding
-    }
 
     override fun setDataNews(item : News){
         with(binding) {
@@ -27,7 +20,7 @@ class NewsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),NewsVie
 
             title.text = item.commenter
             description.text = item.comment
-            date.text = prettyTime.format(strdate)
+            date.text = prettyTime.format(strdate?.toDate())
 
             Glide.with(itemView)
                 .load(item.avatar)
@@ -40,4 +33,6 @@ class NewsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),NewsVie
     override fun showLoading(visibility: Int) {}
 
     override fun adapterRefresh(){}
+
+    override fun clearRefreshing(){}
 }
