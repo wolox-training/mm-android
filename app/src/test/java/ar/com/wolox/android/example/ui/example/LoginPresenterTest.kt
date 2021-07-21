@@ -3,6 +3,8 @@ package ar.com.wolox.android.example.ui.example
 import ar.com.wolox.android.example.model.AuthenticationBody
 import ar.com.wolox.android.example.model.User
 import ar.com.wolox.android.example.network.repository.UserRepository
+import ar.com.wolox.android.example.ui.example.presenter.LoginPresenter
+import ar.com.wolox.android.example.ui.example.view.LoginView
 import ar.com.wolox.android.example.utils.Extras
 import ar.com.wolox.android.example.utils.UserSession
 import ar.com.wolox.wolmo.core.tests.CoroutineTestRule
@@ -93,8 +95,8 @@ class LoginPresenterTest : WolmoPresenterTest<LoginView, LoginPresenter>() {
     fun requestFailedLogin() = runBlocking {
 
         // Usuario y contraseña correctas pero hay error de conexion a la red
-        val username = "melvin.lambert15@example.com"
-        val password = "123456"
+        val username = Extras.Constantes.login_test_email
+        val password = Extras.Constantes.login_test_password
 
         // Usuario response
         val authenticationbody = AuthenticationBody(username, password)
@@ -110,24 +112,24 @@ class LoginPresenterTest : WolmoPresenterTest<LoginView, LoginPresenter>() {
     fun requestOkLogin() = runBlocking {
 
         // Usuario y contraseña correctas
-        val username = "melvin.lambert15@example.com"
-        val password = "123456"
+        val username = Extras.Constantes.login_test_email
+        val password = Extras.Constantes.login_test_password
 
         // Body Response
-        val id = 6
-        val email = "melvin.lambert15@example.com"
-        val provider = "email"
-        val uid = "melvin.lambert15@example.com"
-        val allow_password_change = false
-        val name = "Melvin Lambert"
-        val nickname = "Melvin"
-        val image = ""
+        val id = Extras.Constantes.login_test_id
+        val email = Extras.Constantes.login_test_email
+        val provider = Extras.Constantes.login_test_provider
+        val uid = Extras.Constantes.login_test_uid
+        val allow_password_change = Extras.Constantes.login_test_allow_password_change
+        val name = Extras.Constantes.login_test_name
+        val nickname = Extras.Constantes.login_test_nickname
+        val image = Extras.Constantes.login_test_image
         val user = User(id, email, provider, uid, allow_password_change, name, nickname, image)
 
         // Header Response
-        val header_accessToken = "I54n43S_l62NDKWXbuZaSA"
-        val header_client = "P-DyyGXKtHWrc1Lg5wnY2g"
-        val header_uid = "melvin.lambert15@example.com"
+        val header_accessToken = Extras.Constantes.login_test_header_accessToken
+        val header_client = Extras.Constantes.login_test_header_client
+        val header_uid = Extras.Constantes.login_test_header_uid
 
         // Usuario response
         val authenticationbody = AuthenticationBody(username, password)

@@ -15,6 +15,21 @@ object Extras {
         const val ERROR_USER_PASS = "error email pass"
         const val ERROR_NETWORK = "error network"
         const val ERROR_GENERIC = "error generic"
+
+        //TEST
+        const val login_test_email = "melvin.lambert15@example.com"
+        const val login_test_password = "123456"
+        const val login_test_id = 6
+        const val login_test_provider = "email"
+        const val login_test_uid = "melvin.lambert15@example.com"
+        const val login_test_allow_password_change = false
+        const val login_test_name = "Melvin Lambert"
+        const val login_test_nickname = "Melvin"
+        const val login_test_image = ""
+
+        const val login_test_header_accessToken = "I54n43S_l62NDKWXbuZaSA"
+        const val login_test_header_client = "P-DyyGXKtHWrc1Lg5wnY2g"
+        const val login_test_header_uid = "melvin.lambert15@example.com"
     }
 
     object UserLogin {
@@ -24,9 +39,5 @@ object Extras {
         const val ACCESS_TOKEN = "access_token"
         const val UID = "uid"
         const val CLIENT = "client"
-    }
-
-    object ViewPager {
-        const val FAVOURITE_COLOR_KEY = "FAVOURITE_COLOR_KEY"
     }
 }

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/static_spacing_largest_extra"
+        android:layout_margin="@dimen/static_spacing_medium_extra">
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="@dimen/static_spacing_huge"
+            android:layout_height="@dimen/static_spacing_huge"
+            android:src="@mipmap/wolox_logo"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_toEndOf="@+id/image"
+            android:layout_toStartOf="@+id/li_date"
+            android:layout_marginStart="@dimen/static_spacing_small"
+            android:layout_marginEnd="@dimen/static_spacing_small">
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/item_new_title"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/item_new_description"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/li_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_alignParentEnd="true">
+
+            <TextView
+                android:id="@+id/date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/item_new_date"/>
+
+            <ImageView
+                android:id="@+id/like"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_like_off"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/static_spacing_medium"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</layout>

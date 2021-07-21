@@ -1,5 +1,6 @@
 package ar.com.wolox.android.example.ui.example
 
+import ar.com.wolox.android.example.ui.example.activity.HomeActivity
 import dagger.Subcomponent
 import dagger.android.AndroidInjector
 
