@@ -26,20 +26,19 @@ class NewsFragment @Inject constructor() : WolmoFragment<FragmentNewsBinding, Ne
 
     override fun init() {
         with(binding){
-            recyclerview.layoutManager=LinearLayoutManager(context)
-            recyclerview.hasFixedSize()
+            recyclerview.apply {
+                layoutManager=LinearLayoutManager(context)
+                hasFixedSize()
+            }
 
             //Noticias de pruebas
-            val new1=News("1","Titulo 1","Descripción 1",Date(),"https://www.wolox.com.ar/assets/about-us/nurturing_talent.jpg")
-            val new2=News("2","Titulo 2","Descripción 2",Date(),"https://www.wolox.com.ar/assets/about-us/nurturing_talent.jpg")
-            val new3=News("3","Titulo 3","Descripción 3",Date(),"https://www.wolox.com.ar/assets/about-us/nurturing_talent.jpg")
-            val new4=News("4","Titulo 4","Descripción 4",Date(),"https://www.wolox.com.ar/assets/about-us/nurturing_talent.jpg")
-
-            val news= mutableListOf<News>()
-            news.add(new1)
-            news.add(new2)
-            news.add(new3)
-            news.add(new4)
+            val currentdate = Date()
+            val news= List(4) {
+                News("1","Titulo 1","Descripción 1",currentdate,"https://www.wolox.com.ar/assets/about-us/nurturing_talent.jpg")
+                News("2","Titulo 2","Descripción 2",currentdate,"https://www.wolox.com.ar/assets/about-us/nurturing_talent.jpg")
+                News("3","Titulo 3","Descripción 3",currentdate,"https://www.wolox.com.ar/assets/about-us/nurturing_talent.jpg")
+                News("4","Titulo 4","Descripción 4",currentdate,"https://www.wolox.com.ar/assets/about-us/nurturing_talent.jpg")
+            }
 
             //Inicializar las noticias
             presenter.addAllItemsNews(news)
@@ -61,9 +60,9 @@ class NewsFragment @Inject constructor() : WolmoFragment<FragmentNewsBinding, Ne
         }
     }
 
+    override fun setDataNews(item : News){}
+
     companion object {
         fun newInstance() = NewsFragment()
     }
-
-    override fun setDataNews(item : News){}
 }

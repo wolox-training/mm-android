@@ -15,9 +15,8 @@ class NewsAdapter @Inject constructor(private var presenter: NewsPresenter): Rec
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsViewHolder {
         //Inicializar binding
         val binding : ItemNewBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.item_new, parent, false);
-        presenter.addBinding(binding)
 
-        return NewsViewHolder(binding.root)
+        return NewsViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: NewsViewHolder, position: Int) {

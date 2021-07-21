@@ -10,23 +10,17 @@ import javax.inject.Inject
 class NewsPresenter @Inject constructor() : BasePresenter<NewsView>(){
 
     private var items : MutableList<News> = mutableListOf()
-    private lateinit var bindingHolder: ItemNewBinding
-
-    //Agregar el binding
-    fun addBinding(binding : ItemNewBinding){
-        bindingHolder=binding
-    }
 
     //Para cargar todos los items
-    fun addAllItemsNews(items : MutableList<News>){
+    fun addAllItemsNews(items : List<News>){
         this.items.addAll(items)
     }
 
     fun onBindNewsViewAtPosition(holder: NewsViewHolder, position: Int){
-        holder.binding=bindingHolder
-
-        //Cargar los datos de las noticias
-        holder.setDataNews(items[position])
+        holder.apply {
+            //Cargar los datos de las noticias
+            setDataNews(items[position])
+        }
     }
 
     fun getNewsRowsCount() : Int = items.size
