@@ -9,6 +9,7 @@ import ar.com.wolox.android.example.model.News
 import ar.com.wolox.android.example.ui.example.adapter.NewsAdapter
 import ar.com.wolox.android.example.ui.example.presenter.NewsPresenter
 import ar.com.wolox.android.example.ui.example.view.NewsView
+import ar.com.wolox.android.example.utils.Extras
 import ar.com.wolox.wolmo.core.fragment.WolmoFragment
 import ar.com.wolox.wolmo.core.util.ToastFactory
 import java.util.*
@@ -29,20 +30,8 @@ class NewsFragment @Inject constructor() : WolmoFragment<FragmentNewsBinding, Ne
             recyclerview.layoutManager=LinearLayoutManager(context)
             recyclerview.hasFixedSize()
 
-            //Noticias de pruebas
-            val new1=News("1","Titulo 1","Descripción 1",Date(),"https://www.wolox.com.ar/assets/about-us/nurturing_talent.jpg")
-            val new2=News("2","Titulo 2","Descripción 2",Date(),"https://www.wolox.com.ar/assets/about-us/nurturing_talent.jpg")
-            val new3=News("3","Titulo 3","Descripción 3",Date(),"https://www.wolox.com.ar/assets/about-us/nurturing_talent.jpg")
-            val new4=News("4","Titulo 4","Descripción 4",Date(),"https://www.wolox.com.ar/assets/about-us/nurturing_talent.jpg")
-
-            val news= mutableListOf<News>()
-            news.add(new1)
-            news.add(new2)
-            news.add(new3)
-            news.add(new4)
-
             //Inicializar las noticias
-            presenter.addAllItemsNews(news)
+            presenter.getNews()
 
             adapter = NewsAdapter(presenter)
             recyclerview.adapter=adapter
@@ -61,9 +50,28 @@ class NewsFragment @Inject constructor() : WolmoFragment<FragmentNewsBinding, Ne
         }
     }
 
-    companion object {
-        fun newInstance() = NewsFragment()
+    // Mostrar los errores en cada campo
+    override fun showError(tipo: String) {
+        when (tipo) {
+            Extras.Constantes.NO_MORE_NEWS -> toastFactory.show(R.string.news_no_more_news)
+            Extras.Constantes.ERROR_NETWORK -> toastFactory.show(R.string.fragment_login_error_network)
+            Extras.Constantes.ERROR_GENERIC -> toastFactory.show(R.string.unknown_error)
+        }
+    }
+
+    override fun showLoading(visibility: Int) {
+        with(binding) {
+            progress.visibility = visibility
+        }
     }
 
     override fun setDataNews(item : News){}
+
+    override fun adapterRefresh(){
+        adapter.notifyDataSetChanged()
+    }
+
+    companion object {
+        fun newInstance() = NewsFragment()
+    }
 }

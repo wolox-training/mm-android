@@ -3,6 +3,9 @@ package ar.com.wolox.android.example.utils
 import android.app.Activity
 import android.content.SharedPreferences
 import androidx.fragment.app.Fragment
+import java.text.ParseException
+import java.text.SimpleDateFormat
+import java.util.*
 
 /**
  * Util class to store keys to use with [SharedPreferences] or as argument between
@@ -15,6 +18,7 @@ object Extras {
         const val ERROR_USER_PASS = "error email pass"
         const val ERROR_NETWORK = "error network"
         const val ERROR_GENERIC = "error generic"
+        const val NO_MORE_NEWS = "no more news"
 
         //TEST
         const val login_test_email = "melvin.lambert15@example.com"
@@ -39,5 +43,21 @@ object Extras {
         const val ACCESS_TOKEN = "access_token"
         const val UID = "uid"
         const val CLIENT = "client"
+    }
+
+    //Convierte una fecha pasada como string a Date, en el formato yyyy-MM-dd
+    fun convertToDate(strdate : String) : Date? {
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd")
+
+        var convertedDate : Date?= null
+
+        try {
+            convertedDate = dateFormat.parse(strdate)
+        } catch (e : ParseException) {
+            // TODO Auto-generated catch block
+            e.printStackTrace()
+        }
+
+        return convertedDate
     }
 }
