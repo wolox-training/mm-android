@@ -5,6 +5,7 @@ import ar.com.wolox.android.databinding.ItemNewBinding
 import ar.com.wolox.android.example.model.News
 import ar.com.wolox.android.example.ui.example.view.NewsView
 import ar.com.wolox.android.example.utils.Extras
+import ar.com.wolox.android.example.utils.Extras.convertToDate
 import com.bumptech.glide.Glide
 import org.ocpsoft.prettytime.PrettyTime
 
@@ -16,7 +17,7 @@ class NewsViewHolder constructor(private var binding: ItemNewBinding) : Recycler
         with(binding) {
 
             //Convertir la fecha string a date
-            val strdate = Extras.convertToDate(item.date)
+            val strdate = item.date.convertToDate()
 
             title.text = item.commenter
             description.text = item.comment

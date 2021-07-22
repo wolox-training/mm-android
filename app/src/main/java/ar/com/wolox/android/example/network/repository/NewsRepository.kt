@@ -12,7 +12,7 @@ class NewsRepository @Inject constructor(private val retrofitServices: RetrofitS
     private val service: NewsService
             get() = retrofitServices.getService(NewsService::class.java)
 
-    suspend fun getNews(accesstoken: String?, client : String?, uid : String?, page : Int) = withContext(Dispatchers.IO) {
-        NetworkRequestHandler.safeApiCall { service.getNews(accesstoken,client,uid, page) }
+    suspend fun getNews(page : Int) = withContext(Dispatchers.IO) {
+        NetworkRequestHandler.safeApiCall { service.getNews(page) }
     }
 }

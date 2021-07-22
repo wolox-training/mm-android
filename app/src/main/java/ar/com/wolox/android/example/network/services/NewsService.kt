@@ -7,5 +7,5 @@ import retrofit2.http.*
 interface NewsService {
 
     @GET("/comments")
-    suspend fun getNews(@Header("Access-Token") accesstoken : String?,@Header("Client") client : String?,@Header("uid") uid : String?, @Query("page") num : Int): Response<RequestNews>
+    suspend fun getNews(@Query("page") num : Int): Response<RequestNews>
 }

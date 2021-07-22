@@ -11,6 +11,7 @@ import ar.com.wolox.android.example.ui.example.view.LoginView
 import ar.com.wolox.android.example.ui.example.view.NewsView
 import ar.com.wolox.android.example.ui.example.viewholder.NewsViewHolder
 import ar.com.wolox.android.example.utils.Extras
+import ar.com.wolox.android.example.utils.Extras.convertToDate
 import ar.com.wolox.android.example.utils.UserSession
 import ar.com.wolox.wolmo.core.presenter.BasePresenter
 import ar.com.wolox.wolmo.core.presenter.CoroutineBasePresenter
@@ -47,7 +48,7 @@ class NewsPresenter @Inject constructor(private val userSession: UserSession, pr
             view?.showLoading(View.VISIBLE)
 
         // Llamado al endpoint
-        networkRequest(newsRepository.getNews(userSession.acces_token,userSession.client,userSession.uid, currentpage)) {
+        networkRequest(newsRepository.getNews(currentpage)) {
             onResponseSuccessful { requestNews, _ ->
 
                 //Verificar que hay noticias
@@ -79,31 +80,37 @@ class NewsPresenter @Inject constructor(private val userSession: UserSession, pr
 
             }
             onResponseFailed { _, _ ->
-                view?.showError(Extras.Constantes.ERROR_GENERIC)
+                view?.apply {
+                    showError(Extras.Constantes.ERROR_GENERIC)
 
-                // Ocultar progressbar
-                view?.showLoading(View.GONE)
-                view?.clearRefreshing()
+                    // Ocultar progressbar
+                    showLoading(View.GONE)
+                    clearRefreshing()
+                }
             }
             onCallFailure {
-                view?.showError(Extras.Constantes.ERROR_NETWORK)
+                view?.apply {
+                    showError(Extras.Constantes.ERROR_NETWORK)
 
-                // Ocultar progressbar
-                view?.showLoading(View.GONE)
-                view?.clearRefreshing()
+                    // Ocultar progressbar
+                    showLoading(View.GONE)
+                    clearRefreshing()
+                }
             }
         }
     }
 
     //Comparar si hay items nuevos para agregar adelante de la lista
     fun compareItems(newitems : List<News>){
-        val firtselement=Extras.convertToDate(items[0].date)
-        val newitemsaux =newitems.filter { Extras.convertToDate(it.date)!!.isAfter(firtselement) }
+        val firtselement=items[0].date.convertToDate()
+        val newitemsaux =newitems.filter { it.date.convertToDate()!!.isAfter(firtselement) }
 
         //Si no hay noticias nuevas, muestro mensaje
-        if(newitemsaux.isEmpty())
+        if(newitemsaux.isEmpty()) {
             view?.showError(Extras.Constantes.NO_MORE_NEWS)
-        else
+        }
+        else {
             newitemsaux.forEach { items.add(0,it) }
+        }
     }
 }

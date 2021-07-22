@@ -19,7 +19,7 @@
 			app:layout_constraintStart_toStartOf="parent"
 			app:layout_constraintTop_toTopOf="parent"
 			android:visibility="gone"
-			android:elevation="3dp"/>
+			android:elevation="@dimen/static_spacing_small"/>
 
 		<ImageView
 			android:id="@+id/logo"

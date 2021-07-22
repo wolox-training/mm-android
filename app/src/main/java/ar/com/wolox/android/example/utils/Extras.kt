@@ -50,10 +50,8 @@ object Extras {
     }
 
     //Convierte una fecha pasada como string a Date, en el formato yyyy-MM-dd
-    fun convertToDate(strdate : String) : DateTime? {
+    fun String.convertToDate() : DateTime? {
         val dateFormat = DateTimeFormat.forPattern("yyyy-MM-dd")
-
-        return DateTime.parse(strdate,dateFormat)
-
+        return DateTime.parse(this,dateFormat)
     }
 }
