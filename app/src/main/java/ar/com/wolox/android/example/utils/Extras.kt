@@ -38,6 +38,9 @@ object Extras {
         const val login_test_header_uid = "melvin.lambert15@example.com"
 
         const val OFFSETVISIBLE=2
+
+        const val NEW_DETAIL = "new detail"
+        const val NEW_CHANGE = "new change"
     }
 
     object UserLogin {
@@ -47,6 +50,7 @@ object Extras {
         const val ACCESS_TOKEN = "access_token"
         const val UID = "uid"
         const val CLIENT = "client"
+        const val USER_ID = "id"
     }
 
     //Convierte una fecha pasada como string a Date, en el formato yyyy-MM-dd

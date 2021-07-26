@@ -64,4 +64,12 @@ class UserSession @Inject constructor(private val sharedPreferencesManager: Shar
             field = client
             sharedPreferencesManager.store(Extras.UserLogin.CLIENT, field)
         }
+
+    var id: Int = 0
+        // Para setear u obtener el id del usuario guardado en el sharedPreferences
+        get() = sharedPreferencesManager[Extras.UserLogin.USER_ID,0]
+        set(id) {
+            field = id
+            sharedPreferencesManager.store(Extras.UserLogin.USER_ID, field)
+        }
 }

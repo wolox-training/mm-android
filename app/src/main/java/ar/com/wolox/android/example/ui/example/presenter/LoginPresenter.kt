@@ -41,7 +41,7 @@ class LoginPresenter @Inject constructor(private val userSession: UserSession, p
 
         // Llamado al endpoint
         networkRequest(userRepository.signIn(authbody)) {
-            onResponseSuccessful { _, headers ->
+            onResponseSuccessful { userequest, headers ->
                 // Si el login fue satisfactorio, guardamos los datos y continuamos con el Home
                 userSession.apply {
                     loginOk = true
@@ -50,6 +50,11 @@ class LoginPresenter @Inject constructor(private val userSession: UserSession, p
                     acces_token = headers?.get("Access-Token")
                     uid = headers?.get("Uid")
                     client = headers?.get("Client")
+
+                    //Guardo el id del usuario para que se use en otras instancias
+                    if (userequest != null) {
+                        id = userequest.data.id
+                    }
                 }
                 // Ocultar progressbar
                 view?.showLoading(View.GONE)

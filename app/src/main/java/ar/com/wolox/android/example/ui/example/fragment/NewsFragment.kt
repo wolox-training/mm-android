@@ -1,11 +1,15 @@
 package ar.com.wolox.android.example.ui.example.fragment
 
+import android.content.Context
+import android.util.Log
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ar.com.wolox.android.R
 import ar.com.wolox.android.databinding.FragmentNewsBinding
+import ar.com.wolox.android.example.BaseConfiguration
 import ar.com.wolox.android.example.model.News
+import ar.com.wolox.android.example.ui.example.activity.NewDetailActivity
 import ar.com.wolox.android.example.ui.example.adapter.NewsAdapter
 import ar.com.wolox.android.example.ui.example.presenter.NewsPresenter
 import ar.com.wolox.android.example.ui.example.view.NewsView
@@ -86,10 +90,32 @@ class NewsFragment @Inject constructor() : WolmoFragment<FragmentNewsBinding, Ne
         }
     }
 
-    override fun setDataNews(item : News){}
+    override fun setDataNews(item : News, userid : Int){}
 
     override fun adapterRefresh(){
         adapter.notifyDataSetChanged()
+    }
+
+    override fun onItemClick(new : News) {
+        NewDetailActivity.start(requireContext(),new)
+    }
+
+    //Cuando se resume el fragment, se chequea si se hicieron cambios para refrescar las noticias
+    override fun onResume(){
+        super.onResume()
+
+        //Verifico si algo cambio de la noticia para refrescar
+        val pref = context?.getSharedPreferences(BaseConfiguration.SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE)
+        if(pref!=null && pref.getBoolean(Extras.Constantes.NEW_CHANGE,false)) {
+            //Limpio la lista
+            presenter.clearData()
+
+            //Obtengo nuevamente las noticias
+            presenter.getNews(false)
+
+            //Guardo que no hay cambios para que no se refresque siempre
+            pref.edit().putBoolean(Extras.Constantes.NEW_CHANGE,false).apply()
+        }
     }
 
     companion object {

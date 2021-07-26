@@ -2,17 +2,17 @@ package ar.com.wolox.android.example.ui.example.view
 
 import ar.com.wolox.android.example.model.News
 
-interface NewsView{
+interface NewDetailView{
 
-    fun setDataNews(item : News, userid : Int)
+    fun loadData(new : News)
 
     fun showLoading(visibility: Int)
 
     fun showError(tipo: String)
 
-    fun adapterRefresh()
+    fun changeLike()
+
+    fun enabledLike(enabled : Boolean)
 
     fun clearRefreshing()
-
-    fun onItemClick(new : News)
 }
