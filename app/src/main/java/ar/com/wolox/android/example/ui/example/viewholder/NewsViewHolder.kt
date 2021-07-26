@@ -23,11 +23,13 @@ class NewsViewHolder constructor(private var binding: ItemNewBinding) : Recycler
             description.text = item.comment
             date.text = prettyTime.format(strdate?.toDate())
 
-            if(item.likes.contains(userid)) {
-                like.setImageResource(R.mipmap.ic_like_on)
-            }
-            else {
-                like.setImageResource(R.mipmap.ic_like_off)
+            like.apply {
+                if(item.likes.contains(userid)) {
+                    setImageResource(R.mipmap.ic_like_on)
+                }
+                else {
+                    setImageResource(R.mipmap.ic_like_off)
+                }
             }
 
             Glide.with(itemView)

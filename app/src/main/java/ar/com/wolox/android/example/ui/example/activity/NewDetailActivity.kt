@@ -27,8 +27,10 @@ class NewDetailActivity : WolmoActivity<ActivityNewdetailBinding>() {
             setSupportActionBar(toolbar)
 
             //Mostrar button back en el toolbar
-            supportActionBar?.setDisplayHomeAsUpEnabled(true)
-            supportActionBar?.setDisplayShowHomeEnabled(true)
+            supportActionBar?.apply {
+                setDisplayHomeAsUpEnabled(true)
+                setDisplayShowHomeEnabled(true)
+            }
         }
     }
 
