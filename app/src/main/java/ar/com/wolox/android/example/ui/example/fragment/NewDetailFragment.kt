@@ -115,9 +115,6 @@ class NewDetailFragment private constructor() : WolmoFragment<FragmentNewdetailB
                 currentNew.likes.add(userid)
                 like.setImageResource(R.mipmap.ic_like_on_large)
             }
-
-            //Para guardar que algo cambio y refrescar las noticias
-            context?.getSharedPreferences(BaseConfiguration.SHARED_PREFERENCES_NAME,MODE_PRIVATE)?.edit()?.putBoolean(Extras.Constantes.NEW_CHANGE,true)?.apply()
         }
     }
 

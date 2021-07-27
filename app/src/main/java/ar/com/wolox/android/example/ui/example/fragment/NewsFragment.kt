@@ -104,18 +104,9 @@ class NewsFragment @Inject constructor() : WolmoFragment<FragmentNewsBinding, Ne
     override fun onResume(){
         super.onResume()
 
-        //Verifico si algo cambio de la noticia para refrescar
-        val pref = context?.getSharedPreferences(BaseConfiguration.SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE)
-        if(pref!=null && pref.getBoolean(Extras.Constantes.NEW_CHANGE,false)) {
-            //Limpio la lista
-            presenter.clearData()
+        presenter.clearData()
 
-            //Obtengo nuevamente las noticias
-            presenter.getNews(false)
-
-            //Guardo que no hay cambios para que no se refresque siempre
-            pref.edit().putBoolean(Extras.Constantes.NEW_CHANGE,false).apply()
-        }
+        presenter.getNews(false)
     }
 
     companion object {
