@@ -26,15 +26,16 @@
             android:name=".example.ui.example.activity.LoginActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".example.ui.viewpager.ViewPagerActivity"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".example.ui.example.activity.HomeActivity"
             android:label="@string/title_activity_home"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".example.ui.example.activity.SignUpActivity"
             android:label="@string/title_activity_signup"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".example.ui.example.activity.NewDetailActivity"
+            android:label="@string/title_activity_newdetail"
             android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 

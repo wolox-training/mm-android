@@ -12,7 +12,18 @@ class NewsRepository @Inject constructor(private val retrofitServices: RetrofitS
     private val service: NewsService
             get() = retrofitServices.getService(NewsService::class.java)
 
+    //Obtener las noticias
     suspend fun getNews(page : Int) = withContext(Dispatchers.IO) {
         NetworkRequestHandler.safeApiCall { service.getNews(page) }
+    }
+
+    //Cambiar estado de like
+    suspend fun setLike(id : String) = withContext(Dispatchers.IO) {
+        NetworkRequestHandler.safeApiCall { service.setLike(id) }
+    }
+
+    //Obtener datos de 1 noticia
+    suspend fun getDataNew(id : String) = withContext(Dispatchers.IO) {
+        NetworkRequestHandler.safeApiCall { service.getDataNew(id) }
     }
 }

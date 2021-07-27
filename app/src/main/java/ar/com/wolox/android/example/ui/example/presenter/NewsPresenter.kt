@@ -31,13 +31,12 @@ class NewsPresenter @Inject constructor(private val userSession: UserSession, pr
     }
 
     fun onBindNewsViewAtPosition(holder: NewsViewHolder, position: Int){
-        holder.apply {
-            //Cargar los datos de las noticias
-            setDataNews(items[position])
-        }
+        //Cargar los datos de las noticias
+        holder.setDataNews(items[position], userSession.id)
     }
 
     fun getNewsRowsCount() : Int = items.size
+
 
     fun getNews(fromPullRefresh : Boolean) = launch{
         // Si es por pull refresh consulto page=1 y no muestro progressbar
@@ -60,7 +59,7 @@ class NewsPresenter @Inject constructor(private val userSession: UserSession, pr
                     else {
                         //Verificar si se hizo un pull refresh
                         if(fromPullRefresh){
-                            compareItems(requestNews.page)
+                            compareDate(requestNews.page)
 
                             view?.clearRefreshing()
                         }
@@ -101,7 +100,7 @@ class NewsPresenter @Inject constructor(private val userSession: UserSession, pr
     }
 
     //Comparar si hay items nuevos para agregar adelante de la lista
-    fun compareItems(newitems : List<News>){
+    fun compareDate(newitems : List<News>){
         val firtselement=items[0].date.convertToDate()
         val newitemsaux =newitems.filter { it.date.convertToDate()!!.isAfter(firtselement) }
 
@@ -113,4 +112,16 @@ class NewsPresenter @Inject constructor(private val userSession: UserSession, pr
             newitemsaux.forEach { items.add(0,it) }
         }
     }
+
+    //Click en la noticia
+    fun onItemClickHolder(new : News){
+        view?.onItemClick(new)
+    }
+
+    //Para limpiar la lista y realizar una llamada desde la pagina 1
+    fun clearData(){
+        page = 1
+        items = mutableListOf()
+    }
+
 }
